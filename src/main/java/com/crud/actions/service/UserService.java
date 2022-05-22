@@ -2,7 +2,6 @@ package com.crud.actions.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +25,8 @@ public class UserService {
 		return userList;
 	}
 
-	public Optional<User> getUser(int id) {
-		return userRepository.findById(id);
+	public User getUser(int id) {
+		return userRepository.findById(id).orElse(null);
 	}
 
 	public User saveUser(User user) {
@@ -48,6 +47,12 @@ public class UserService {
 		userRepository.delete(user);
 		//return savedObj;
 		//map.remove(user.getId());
+		return "Deleted User Info : "+ user;
+	}
+
+	public String deleteUser(int id) {
+		User user = getUser(id);
+		userRepository.deleteById(id);
 		return "Deleted User Info : "+ user;
 	}
 
