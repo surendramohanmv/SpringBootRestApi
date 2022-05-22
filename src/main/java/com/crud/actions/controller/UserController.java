@@ -1,7 +1,6 @@
 package com.crud.actions.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,8 +32,8 @@ public class UserController {
 		return allUser;
 	}
 
-	@GetMapping(path = "/getUser")
-	public Optional<User> getUser(@PathVariable int id) {
+	@GetMapping(path = "/getUser/{id}")
+	public User getUser(@PathVariable int id) {
 		System.out.println("Surendra getUser()");
 		return userService.getUser(id);
 	}
@@ -55,6 +54,13 @@ public class UserController {
 	public @ResponseBody String deleteUser(@RequestBody User user) {
 		System.out.println("Surendra deleteUser()");
 		return userService.deleteUser(user);
+	}
+
+
+	@DeleteMapping("/deleteUser/{id}")  
+	public @ResponseBody String deleteUser(@PathVariable int id) {
+		System.out.println("Surendra deleteUser()");
+		return userService.deleteUser(id);
 	}
 
 }
